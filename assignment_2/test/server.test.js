@@ -10,11 +10,11 @@ describe("GET /", () => {
     url: "/"
   };
 
-  beforeEach(async () => {
+  before(async () => {
     server = await init();
   });
 
-  afterEach(async () => {
+  after(async () => {
     await server.stop();
   });
 
@@ -26,8 +26,6 @@ describe("GET /", () => {
   it("should return valid JSON", async () => {
     const res = await server.inject(request);
 
-    assert.deepEqual(JSON.parse(res.payload), {
-      message: "This is test message!"
-    });
+    assert.deepStrictEqual(res.result, { message: "This is test message!" });
   });
 });
